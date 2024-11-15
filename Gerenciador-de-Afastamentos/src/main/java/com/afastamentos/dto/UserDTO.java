@@ -1,7 +1,12 @@
 package com.afastamentos.dto;
 
-import com.afastamentos.model.NotBlank;
 
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,8 +17,14 @@ public class UserDTO {
 
     private Long idUser;
     @NotBlank
+    private String userNameCompleto;
+    @NotBlank
     private String userName;
-    private boolean userType;
+    @NotBlank
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate userNAscimento;
+    @NotBlank
+    private boolean userType = false;
 
     
 }

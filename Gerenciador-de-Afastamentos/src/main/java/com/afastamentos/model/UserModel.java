@@ -13,9 +13,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
-
 @Entity
 @Table(name = "usuarios")
 @Getter
@@ -24,16 +21,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserModel {
 
-    @Id @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
-    @NotBlank
+
     private String userNameCompleto;
-    @NotBlank
+
     private String userName;
-    @JsonFormat(pattern="dd-MM-yyyy")
-    @NotBlank
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate userNAscimento;
     private boolean userType;
 
-    
 }
