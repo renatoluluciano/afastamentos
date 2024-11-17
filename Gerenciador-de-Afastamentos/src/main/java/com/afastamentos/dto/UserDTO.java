@@ -19,12 +19,10 @@ public class UserDTO {
     @NotBlank
     private String userNameCompleto;
     @NotBlank
-    private String userName;
-    @NotBlank
+    private String userName;    
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate userNAscimento;
-    @NotBlank
-    private boolean userType = false;
+    private LocalDate userNascimento;    
+    private boolean userType;
 
     
 }
