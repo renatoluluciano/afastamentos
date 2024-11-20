@@ -14,7 +14,7 @@ import com.afastamentos.model.AgendamentoModel;
 import com.afastamentos.model.UserModel;
 import com.afastamentos.repository.AgendamentoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
+
 import lombok.AllArgsConstructor;
 
 @Service
@@ -57,6 +57,7 @@ public class AgendamentoService {
     public List<AgendamentoModel> bucarPorData(LocalDate date) {
 
         List<AgendamentoModel> agendamento = agendamentoRepository.findByDate(date);
+        
 
         return agendamento;
 
