@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciador_afastamentos/calendario/HomeCalendario.dart';
+import 'package:gerenciador_afastamentos/resultbackend/listartodos.dart';
+import 'package:gerenciador_afastamentos/resultbackend/listartodos_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (_) => const HomeCalendario(),
+        '/': (_) => const Listartodos(),
+        '/listar': (_) => const ListarTodosPage(),
       },
     );
   }

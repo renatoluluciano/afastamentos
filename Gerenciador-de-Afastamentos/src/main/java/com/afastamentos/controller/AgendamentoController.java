@@ -23,6 +23,8 @@ import com.afastamentos.service.AgendamentoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -32,18 +34,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 @RequestMapping("/agendamentos")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 
 public class AgendamentoController {
 
     private final AgendamentoService agendamentoService;
 
     @PostMapping("/novoagendamento/{idUser}")
-    public void novoAgendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO,  @PathVariable Long idUser,  
-    UriComponentsBuilder uriComponentsBuilder){       
+    public ResponseEntity<AgendamentoDTO> novoAgendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO,  @PathVariable Long idUser,  
+    UriComponentsBuilder uriBuilder){       
 
-    agendamentoService.cadastrarAgendamento(agendamentoDTO, idUser);
+    AgendamentoDTO agendamento = agendamentoService.cadastrarAgendamento(agendamentoDTO, idUser);
 
-    
+    if(agendamento != null){
+
+        URI endereco = uriBuilder.path("/agendamentos/{id}").buildAndExpand(agendamento.getIdAgendamento()).toUri();
+
+        return ResponseEntity.created(endereco).body(agendamento);
+    }
+
+    return ResponseEntity.internalServerError().build();
 
     }
     
@@ -56,6 +66,7 @@ public class AgendamentoController {
         return ResponseEntity.ok(agendamentoDTO);
         
     }
+    
     @GetMapping("/{date}")
     public ResponseEntity<List<AgendamentoModel>> buscarPorData(@PathVariable @NotNull LocalDate date){
 

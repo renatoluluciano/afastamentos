@@ -27,16 +27,15 @@ class Agendamento {
 
   factory Agendamento.fromMap(Map<String, dynamic> map) {
     return Agendamento(
-      idAgendamento:
-          map['idAgendamento'] != null ? map['idAgendamento'] as int : null,
-      dataAgendamento: map['dataAgendamento'] as String,
-      tipoAfastamento: map['tipoAfastamento'] as String,
-      idUser: Usuario.fromMap(map['idUser'] as Map<String, dynamic>),
+      idAgendamento: map['idAgendamento'] ?? 0,
+      dataAgendamento: map['dataAgendamento'] ?? 'Veio Nulo',
+      tipoAfastamento: map['tipoAfastamento'] ?? false,
+      idUser: Usuario.fromMap(map['idUser'] ?? <String, dynamic>{}),
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory Agendamento.fromJson(String source) =>
-      Agendamento.fromMap(json.decode(source) as Map<String, dynamic>);
+      Agendamento.fromMap(json.decode(source));
 }

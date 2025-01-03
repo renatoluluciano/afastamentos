@@ -17,7 +17,7 @@ import lombok.Setter;
 public class AgendamentoDTO {
     
     private Long idAgendamento;
-    @JsonFormat(pattern="dd-MM-yyyy")    
+    @JsonFormat(pattern="yyyy-MM-dd")    
     private LocalDate dataAgendamento;
     @Enumerated(EnumType.STRING)    
     private TipoAfastamento tipoAfastamento;

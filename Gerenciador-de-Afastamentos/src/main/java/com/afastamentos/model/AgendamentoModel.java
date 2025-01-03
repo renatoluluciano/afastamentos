@@ -32,7 +32,7 @@ public class AgendamentoModel {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name="id_agendamento")
     private Long idAgendamento;
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name="data_agendamento")
     private LocalDate dataAgendamento;
     @Enumerated(EnumType.STRING)

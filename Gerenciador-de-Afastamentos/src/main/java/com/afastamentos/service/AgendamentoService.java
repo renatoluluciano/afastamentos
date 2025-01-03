@@ -40,13 +40,27 @@ public class AgendamentoService {
 
         agendamento.setIdUser(usuarioModel);
 
-        agendamentoRepository.save(agendamento);
+        //System.out.println(agendamento.getDataAgendamento());
 
-        return modelMapper.map(agendamento, AgendamentoDTO.class);
+        boolean respostaVerificacao = verificaAgendamento(agendamento.getDataAgendamento(), agendamento.getIdUser());
+
+        System.out.println(respostaVerificacao);
+
+        if(respostaVerificacao == true){
+            
+        return null;
+
+        }
+
+        agendamentoRepository.save(agendamento);   
 
         
 
-    }
+        return modelMapper.map(agendamento, AgendamentoDTO.class);
+
+        }
+
+        
 
     public Page<AgendamentoDTO> listarAgendamentos(Pageable paginacao) {
 
@@ -61,6 +75,20 @@ public class AgendamentoService {
 
         return agendamento;
 
+    }
+
+    public boolean verificaAgendamento(LocalDate date, UserModel idUser){
+          
+        List<AgendamentoModel> agendamentos = bucarPorData(date);
+
+        for(AgendamentoModel agendamento : agendamentos){
+            Long idVerificar = agendamento.getIdUser().getIdUser();
+            if(idVerificar == idUser.getIdUser()){
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
