@@ -4,11 +4,13 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.modelmapper.internal.bytebuddy.asm.Advice.Return;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +27,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -35,12 +40,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/agendamentos")
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
+@Transactional
 
 public class AgendamentoController {
 
     private final AgendamentoService agendamentoService;
 
-    @PostMapping("/novoagendamento/{idUser}")
+    @PostMapping(value = "/novoagendamento/{idUser}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AgendamentoDTO> novoAgendamento(@RequestBody @Valid AgendamentoDTO agendamentoDTO,  @PathVariable Long idUser,  
     UriComponentsBuilder uriBuilder){       
 
@@ -74,6 +80,22 @@ public class AgendamentoController {
 
         return ResponseEntity.ok(agendamentoDTO);
 
+    }
+
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<AgendamentoDTO> alterarAgendamento(@PathVariable Long id, @RequestBody @Valid AgendamentoDTO agendamentoDTO) {
+        
+        AgendamentoDTO agendamentoAtual = agendamentoService.alterarAgendamento(id, agendamentoDTO);
+        
+        return ResponseEntity.ok(agendamentoAtual);
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<AgendamentoDTO> deletarAgendamento(@PathVariable @NotNull Long id){
+
+        agendamentoService.excluirAgendamento(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 

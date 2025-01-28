@@ -14,7 +14,7 @@ import com.afastamentos.model.AgendamentoModel;
 import com.afastamentos.model.UserModel;
 import com.afastamentos.repository.AgendamentoRepository;
 
-
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -51,6 +51,9 @@ public class AgendamentoService {
         return null;
 
         }
+
+        System.out.println(agendamento.getDataAgendamento());
+        System.out.println(usuario.getUserName());
 
         agendamentoRepository.save(agendamento);   
 
@@ -89,6 +92,27 @@ public class AgendamentoService {
         }
 
         return false;
+    }
+
+    public AgendamentoDTO alterarAgendamento(Long id, AgendamentoDTO agendamentoDTO){
+
+        AgendamentoModel agendamento = modelMapper.map(agendamentoDTO, AgendamentoModel.class);
+
+        agendamento.setIdAgendamento(id);
+
+        agendamento = agendamentoRepository.save(agendamento);
+
+        return modelMapper.map(agendamento, AgendamentoDTO.class);
+
+    }
+
+
+
+    public void excluirAgendamento(@NotNull Long id) {
+
+        agendamentoRepository.deleteById(id);
+
+       
     }
 
 }
