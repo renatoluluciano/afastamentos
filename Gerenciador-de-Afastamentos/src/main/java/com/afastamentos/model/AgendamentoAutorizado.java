@@ -16,7 +16,7 @@ import lombok.Setter;
 public class AgendamentoAutorizado extends Agendamento{
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    private UserModel idUser;
+    @JoinColumn(name = "id_agendamento_previo")
+    private AgendamentoPrevio idAgendamentoPrevio;
 
 }

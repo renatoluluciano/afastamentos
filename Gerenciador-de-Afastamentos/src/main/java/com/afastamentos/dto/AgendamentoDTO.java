@@ -21,6 +21,8 @@ public class AgendamentoDTO {
     private LocalDate dataAgendamento;
     @Enumerated(EnumType.STRING)    
     private TipoAfastamento tipoAfastamento;
-    private UserModel user;
+    private boolean confirmado;
+    private UserDTO idUser;
+    
     
 }

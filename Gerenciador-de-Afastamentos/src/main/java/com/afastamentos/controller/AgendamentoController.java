@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/agendamentos")
+@RequestMapping("")
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 @Transactional

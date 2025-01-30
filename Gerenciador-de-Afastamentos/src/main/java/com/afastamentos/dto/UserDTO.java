@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,8 @@ public class UserDTO {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate userNascimento;    
     private boolean userType;
+    
+    
 
     
 }
